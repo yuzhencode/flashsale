@@ -43,7 +43,7 @@ public class ItemServiceImpl implements ItemService {
         }
         ItemDO itemDO = new ItemDO();
         BeanUtils.copyProperties(itemModel, itemDO);
-        itemDO.setPrice(itemModel.getPrice().doubleValue());
+        itemDO.setPrice(itemModel.getPrice());
         return itemDO;
     }
 
@@ -130,7 +130,7 @@ public class ItemServiceImpl implements ItemService {
     private ItemModel convertModelFromDataObject(ItemDO itemDO, ItemStockDO itemStockDO){
         ItemModel itemModel = new ItemModel();
         BeanUtils.copyProperties(itemDO, itemModel);
-        itemModel.setPrice(new BigDecimal(itemDO.getPrice()));
+        itemModel.setPrice(itemDO.getPrice());
         itemModel.setStock(itemStockDO.getStock());
 
         return itemModel;
