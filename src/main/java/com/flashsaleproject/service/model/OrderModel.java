@@ -3,7 +3,7 @@ package com.flashsaleproject.service.model;
 import java.math.BigDecimal;
 
 public class OrderModel {
-    //交易单号，例如2019052100001212，使用string类型
+    //Order number, e.g. 2019052100001212, using string type
 
     private String id;
 
@@ -11,10 +11,10 @@ public class OrderModel {
 
     private Integer itemId;
 
-    //若非空，则表示是以秒杀商品方式下单
+    //If it is not empty, it means that the order is placed as a second order.
     private Integer promoId;
 
-    //购买时商品的单价,若promoId非空，则表示是以秒杀商品方式下单
+    //The unit price of the product at the time of purchase, if promoId is not empty, it means that the order is placed in the form of seconds.
     private BigDecimal itemPrice;
 
     private  Integer amount;

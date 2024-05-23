@@ -7,10 +7,10 @@ import java.util.Map;
 
 public class ValidationResult {
 
-    //校验结果是否有错
+    //Verify that the results are not incorrect
     private boolean hasError;
 
-    //存放错误信息map
+    //Store error message map
     private Map<String, String> errorMsgMaps = new HashMap<>();
 
     public boolean isHasError() {
@@ -29,7 +29,7 @@ public class ValidationResult {
         this.errorMsgMaps = errorMsgMaps;
     }
 
-    //实现通用的通过格式化字符串信息获取错误结果的msg方法
+    //Implement generic msg method for getting error results from formatted string messages
     public String getErrMsg(){
         return StringUtils.join(errorMsgMaps.values().toArray(), ",");
     }

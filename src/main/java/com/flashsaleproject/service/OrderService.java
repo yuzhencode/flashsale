@@ -5,9 +5,9 @@ import com.flashsaleproject.service.model.OrderModel;
 
 public interface OrderService {
 
-    //1.通过url上传过来秒杀活动id，然后下单接口内校验对应id是否属于对应商品且活动已开始
-    //2.直接在下单接口内判断对应的商品是否存在秒杀活动，若存在进行中的则以秒杀价格下单
-    //倾向于使用第一种形式，因为对同一个商品可能存在不同的秒杀活动，而且第二种方案普通销售的商品也需要校验秒杀
+    //1.Upload the id of the campaign via url, then check if the corresponding id belongs to the corresponding product and the campaign has started in the order interface.
+    //2.Directly in the order interface to determine whether the corresponding product spike activity, if there is in progress, then order at the price of the spike
+    //The first option is preferred because there may be different seconds for the same item, and the second option for general sale items needs to be calibrated for seconds.
     OrderModel createOrder(Integer userId, Integer itemId, Integer promoId, Integer amount) throws BusinessException;
 
 }

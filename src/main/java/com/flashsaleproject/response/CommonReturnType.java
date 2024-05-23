@@ -1,11 +1,11 @@
 package com.flashsaleproject.response;
 
 public class CommonReturnType {
-//表明对应请求的返回处理结果“success“ or ”fail“
+//Indicates ‘success’ or ‘fail’ for the corresponding request.
     private String status;
 
-    //status=success，data返回前端所需数据
-    //status=fail，data使用通用错误码格式
+    //status=success, data returns the data required by the front-end
+    //status=fail, data uses the generic error code format
     private Object data;
 
     public static CommonReturnType creat(Object result){
