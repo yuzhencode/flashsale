@@ -46,7 +46,7 @@ public class PromoServiceImpl implements PromoService {
         }
         PromoModel promoModel = new PromoModel();
         BeanUtils.copyProperties(promoDO, promoModel);
-        promoModel.setPromoItemPrice(new BigDecimal(promoDO.getPromoItemPrice()));
+        promoModel.setPromoItemPrice(promoDO.getPromoItemPrice());
         promoModel.setStartDate(promoDO.getStartDate());
 
         return  promoModel;
