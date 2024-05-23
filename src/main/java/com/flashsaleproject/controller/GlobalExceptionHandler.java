@@ -16,9 +16,7 @@ import com.flashsaleproject.error.BusinessException;
 import com.flashsaleproject.error.EmBusinessError;
 import com.flashsaleproject.response.CommonReturnType;
 
-/**
- * Created by hzllb on 2018/12/22.
- */
+
 @ControllerAdvice
 public class GlobalExceptionHandler{
     @ExceptionHandler(Exception.class)
@@ -32,10 +30,10 @@ public class GlobalExceptionHandler{
             responseData.put("errMsg",businessException.getErrMsg());
         }else if(ex instanceof ServletRequestBindingException){
             responseData.put("errCode",EmBusinessError.UNKNOWN_ERROR.getErrCode());
-            responseData.put("errMsg","url绑定路由问题");
+            responseData.put("errMsg","URL binding routing issue");
         }else if(ex instanceof NoHandlerFoundException){
             responseData.put("errCode",EmBusinessError.UNKNOWN_ERROR.getErrCode());
-            responseData.put("errMsg","没有找到对应的访问路径");
+            responseData.put("errMsg","The path to the access was not found");
         }else{
             responseData.put("errCode", EmBusinessError.UNKNOWN_ERROR.getErrCode());
             responseData.put("errMsg",EmBusinessError.UNKNOWN_ERROR.getErrMsg());

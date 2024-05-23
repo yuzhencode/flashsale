@@ -25,9 +25,9 @@ public class PromoModel {
 
     private BigDecimal promoItemPrice;
 
-    //1:未开始
-    //2.进行中
-    //3.已结束
+    //1: Not started
+    //2. In progress
+    //3. Finished
     private Integer status;
 
     public Integer getStatus() {

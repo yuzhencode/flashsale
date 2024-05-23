@@ -13,7 +13,7 @@ public class ValidatorImpl implements InitializingBean {
 
     private Validator validator;
 
-    //实现校验方法并返回校验结果
+    //Implement the validation method and return the validation result
     public ValidationResult validate(Object bean){
         ValidationResult result = new ValidationResult();
         Set<ConstraintViolation<Object>> constraintViolationSet = validator.validate(bean);
@@ -30,7 +30,7 @@ public class ValidatorImpl implements InitializingBean {
 
     @Override
     public void afterPropertiesSet() throws Exception {
-        //将hibernat validator通过工厂的初始化方式使其实例化
+        //Instantiate hibernat validator with factory initialisation
         this.validator = Validation.buildDefaultValidatorFactory().getValidator();
     }
 }
