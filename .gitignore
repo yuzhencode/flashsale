@@ -39,5 +39,5 @@ build/
 
 
 ##personal config file##
-src/main/resources/application.properties
-src/main/resources/mybatis-generator.xml
+/src/main/resources/application.properties
+/src/main/resources/mybatis-generator.xml
