@@ -10,6 +10,7 @@ import com.flashsaleproject.service.UserService;
 import com.flashsaleproject.service.model.UserModel;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
@@ -18,6 +19,8 @@ import java.io.UnsupportedEncodingException;
 import java.security.NoSuchAlgorithmException;
 import java.util.Base64;
 import java.util.Random;
+import java.util.UUID;
+import java.util.concurrent.TimeUnit;
 
 
 @Controller("user")
@@ -32,6 +35,8 @@ public class UserController extends BaseController{
     private HttpServletRequest httpServletRequest;
     @Autowired
     private UserPasswordDOMapper userPasswordDOMapper;
+    @Autowired
+    private RedisTemplate redisTemplate;
 
 
     //用户接口
@@ -47,10 +52,20 @@ public class UserController extends BaseController{
         //用户登录服务，校验用户登录是否合法
         UserModel userModel = userService.validateLogin(telphone, this.EncodeByMd5(password));
 
-        this.httpServletRequest.getSession().setAttribute("IS_LOGIN", true);
-        this.httpServletRequest.getSession().setAttribute("LOGIN_USER", userModel);
+        //1-将登陆凭证加入用户登陆成功的session内
+//        this.httpServletRequest.getSession().setAttribute("IS_LOGIN", true);
+//        this.httpServletRequest.getSession().setAttribute("LOGIN_USER", userModel);
 
-        return CommonReturnType.creat(null);
+        //2-若用户登陆验证成功后将对应的登录信息喝登录凭证一起存入redis中
+        //2.1-生成登录凭证token，uuid
+        String uuidToken = UUID.randomUUID().toString();
+        uuidToken = uuidToken.replace("-", "");
+        //2.2-建立token和用户登录态的联系
+        redisTemplate.opsForValue().set(uuidToken, userModel);
+        redisTemplate.expire(uuidToken, 1, TimeUnit.HOURS);
+
+        //下发了token
+        return CommonReturnType.creat(uuidToken);
     }
     //用户注册接口
     @RequestMapping(value = "/register", method = {RequestMethod.POST},consumes = {CONTENT_TYPE_FORMED})
