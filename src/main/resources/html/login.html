@@ -75,6 +75,8 @@
               success:function (data) {
                   if (data.status=="success") {
                       alert("success");
+                      var token = data.data;
+                      window.localStorage["token"] = token;
                       window.location.href="listitem.html"
                   }else {
                       alert("failure，because " + data.data.errMsg);

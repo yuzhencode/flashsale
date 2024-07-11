@@ -6,10 +6,10 @@
 <generatorConfiguration>
 
     <context id="DB2Tables" targetRuntime="MyBatis3">
-        <!--        <jdbcConnection driverClass="com.mysql.jdbc.Driver" connectionURL="jdbc:mysql://*.*.*.*:*/****"-->
-        <!--                        userId="****" password="******">-->
+                <jdbcConnection driverClass="com.mysql.jdbc.Driver" connectionURL="jdbc:mysql://124.222.72.151:3306/flashsale"
+                                userId="jiuxing" password="Charlie-929">
 
-<!--            <property name="nullCatalogMeansCurrent" value="true" />-->
+                    <property name="nullCatalogMeansCurrent" value="true" />
         </jdbcConnection>
         <!--生成dataobject类存放位置-->
         <javaModelGenerator targetPackage="com.flashsaleproject.dataobject" targetProject="src/main/java">
@@ -43,8 +43,8 @@
 <!--        <table tableName="sequence_info" domainObjectName="SequenceDO" enableCountByExample="false"-->
 <!--               enableUpdateByExample="false" enableDeleteByExample="false"-->
 <!--               enableSelectByExample="false" selectByExampleQueryId="false"/>-->
-<!--        <table tableName="promo" domainObjectName="PromoDO" enableCountByExample="false"-->
-<!--               enableUpdateByExample="false" enableDeleteByExample="false"-->
-<!--               enableSelectByExample="false" selectByExampleQueryId="false"/>-->
+        <table tableName="promo" domainObjectName="PromoDO" enableCountByExample="false"
+               enableUpdateByExample="false" enableDeleteByExample="false"
+               enableSelectByExample="false" selectByExampleQueryId="false"/>
     </context>
 </generatorConfiguration>
