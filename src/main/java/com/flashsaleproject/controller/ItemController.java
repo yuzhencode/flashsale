@@ -3,6 +3,7 @@ package com.flashsaleproject.controller;
 import com.flashsaleproject.controller.viewobject.ItemVO;
 import com.flashsaleproject.error.BusinessException;
 import com.flashsaleproject.response.CommonReturnType;
+import com.flashsaleproject.service.CacheService;
 import com.flashsaleproject.service.ItemService;
 import com.flashsaleproject.service.model.ItemModel;
 import org.springframework.beans.BeanUtils;
@@ -27,6 +28,9 @@ public class ItemController extends BaseController{
 
     @Autowired
     private RedisTemplate redisTemplate;
+
+    @Autowired
+    private CacheService cacheService;
 
     //商品创建接口
     @RequestMapping(value = "/create", method = {RequestMethod.POST},consumes = {CONTENT_TYPE_FORMED})
@@ -53,18 +57,23 @@ public class ItemController extends BaseController{
     @RequestMapping(value = "/get", method = {RequestMethod.GET})
     @ResponseBody
     public CommonReturnType getItem(@RequestParam(name = "id")Integer id){
+        ItemModel itemModel = null;
 
-        //根据商品id到redis内获取
-        ItemModel itemModel = (ItemModel)redisTemplate.opsForValue().get("item_"+id);
+        //先取本地缓存
+        itemModel = (ItemModel)cacheService.getFromCommonCache("item_"+id);
 
 
-
-        //若redis内不存在对应的itemModel，则访问下游service
         if(itemModel == null){
-            itemModel = itemService.getItemById(id);
-            //设置itemMdel到redis内
-            redisTemplate.opsForValue().set("item_"+id, itemModel);
-            redisTemplate.expire("item_"+id, 10, TimeUnit.MINUTES);
+            //根据商品id到redis内获取
+            itemModel = (ItemModel)redisTemplate.opsForValue().get("item_"+id);
+            if(itemModel == null) {
+                //若redis内不存在对应的itemModel，则访问下游service
+                itemModel = itemService.getItemById(id);
+                //设置itemMdel到redis内
+                redisTemplate.opsForValue().set("item_" + id, itemModel);
+                redisTemplate.expire("item_" + id, 10, TimeUnit.MINUTES);
+            }
+            cacheService.setCommonCache("item_" + id, itemModel);
         }
 
 //        ItemModel itemModel = itemService.getItemById(id);
