@@ -6,8 +6,8 @@
 <generatorConfiguration>
 
     <context id="DB2Tables" targetRuntime="MyBatis3">
-                <jdbcConnection driverClass="com.mysql.jdbc.Driver" connectionURL="jdbc:mysql://124.222.72.151:3306/flashsale"
-                                userId="jiuxing" password="Charlie-929">
+                <jdbcConnection driverClass="com.mysql.jdbc.Driver" connectionURL="jdbc:mysql://****:3306/flashsale"
+                                userId="****" password="****">
 
                     <property name="nullCatalogMeansCurrent" value="true" />
         </jdbcConnection>
