@@ -1,9 +1,10 @@
 package com.flashsaleproject.service.model;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.math.BigDecimal;
 
-public class PromoModel {
+public class PromoModel implements Serializable{
 
     private Integer id;
 
